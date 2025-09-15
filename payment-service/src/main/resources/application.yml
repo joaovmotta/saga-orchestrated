@@ -13,3 +13,12 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKER:localhost:9092}
+    topic:
+        orchestrator: orchestrator
+        payment-success: payment-success
+        payment-fail: payment-fail
+    consumer:
+      group-id: payment-group
+      auto-offset-reset: latest
