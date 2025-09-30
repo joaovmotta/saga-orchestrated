@@ -28,7 +28,7 @@ import static org.springframework.util.ObjectUtils.isEmpty;
 @AllArgsConstructor
 public class ProductValidationService {
 
-    private static final String CURRENT_SOURCE = "PRODUCT_VALIDATION_SOURCE";
+    private static final String CURRENT_SOURCE = "PRODUCT_VALIDATION_SERVICE";
 
     private final JsonUtil jsonUtil;
 

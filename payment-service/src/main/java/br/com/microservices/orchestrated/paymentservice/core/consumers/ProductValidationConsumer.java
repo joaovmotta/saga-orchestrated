@@ -1,5 +1,6 @@
 package br.com.microservices.orchestrated.paymentservice.core.consumers;
 
+import br.com.microservices.orchestrated.paymentservice.core.services.PaymentService;
 import br.com.microservices.orchestrated.paymentservice.core.utils.JsonUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,8 @@ public class ProductValidationConsumer {
 
     private final JsonUtil jsonUtil;
 
+    private final PaymentService service;
+
     @KafkaListener(
             groupId = "${spring.kafka.consumer.group-id}",
             topics = "${spring.kafka.topic.payment-success}"
@@ -23,7 +26,7 @@ public class ProductValidationConsumer {
 
         var event = jsonUtil.toEvent(payload);
 
-        log.info(event.toString());
+        service.realizePayment(event);
     }
 
     @KafkaListener(
@@ -36,6 +39,6 @@ public class ProductValidationConsumer {
 
         var event = jsonUtil.toEvent(payload);
 
-        log.info(event.toString());
+        service.realizeRefund(event);
     }
 }
